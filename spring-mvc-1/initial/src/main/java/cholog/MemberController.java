@@ -1,16 +1,22 @@
 package cholog;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MemberController {
 
-    public String world() {
+    @GetMapping("/hello")
+    public String world(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
+
         // TODO: /hello 요청 시 resources/templates/static.html 페이지가 응답할 수 있도록 설정하세요.
-        // TODO: 쿼리 파라미터로 name 요청이 들어왔을 때 해당 값을 hello.html에서 사용할 수 있도록 하세요.
-        return null;
+        // TODO: 쿼리 파라미터로 name 요청이 들어왔을 때 해당 값을 hello.html에서 사용할 수 있도록 하세요
+        model.addAttribute("name", name);
+        return "hello"; // hello.html을 반환
     }
 
     public Person json() {
